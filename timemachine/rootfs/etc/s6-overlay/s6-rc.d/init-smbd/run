@@ -35,6 +35,13 @@ tempio \
     -template /usr/share/tempio/smb.gtpl \
     -out /etc/samba/smb.conf
 
+# Generate avahi service file from template
+mkdir -p /etc/avahi/services
+tempio \
+    -conf /data/options.json \
+    -template /usr/share/tempio/timemachine.service.gtpl \
+    -out /etc/avahi/services/timemachine.service
+
 bashio::log.info "Time Machine share '${share_name}' initialized for user '${username}'"
 if [ "${max_size_gb}" -gt 0 ]; then
     bashio::log.info "Maximum backup size: ${max_size_gb} GB"

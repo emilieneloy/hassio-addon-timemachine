@@ -1,6 +1,0 @@
-#!/command/with-contenv bashio
-if [[ "${1}" -ne 0 ]] && [[ "${1}" -ne 256 ]]; then
-    bashio::log.warning "mDNS advertisement crashed (exit code: ${1}), restarting..."
-else
-    bashio::log.info "mDNS advertisement stopped"
-fi
