@@ -1,0 +1,8 @@
+#!/command/with-contenv bashio
+bashio::log.info "Starting D-Bus and Avahi daemon..."
+
+rm -f /var/run/dbus/pid /var/run/avahi-daemon/pid
+dbus-daemon --system --nofork &
+sleep 1
+
+exec avahi-daemon --no-drop-root --no-chroot
