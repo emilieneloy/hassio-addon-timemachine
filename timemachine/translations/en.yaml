@@ -1,0 +1,13 @@
+configuration:
+  username:
+    name: Username
+    description: SMB username for Time Machine authentication
+  password:
+    name: Password
+    description: SMB password for Time Machine authentication
+  share_name:
+    name: Share Name
+    description: Name of the Time Machine SMB share (visible in macOS)
+  max_size_gb:
+    name: Maximum Size (GB)
+    description: Maximum backup size in gigabytes (0 for unlimited)

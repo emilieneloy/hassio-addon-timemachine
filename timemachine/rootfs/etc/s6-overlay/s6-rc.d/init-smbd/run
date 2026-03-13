@@ -1,0 +1,43 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Initialize Samba for Time Machine
+# ==============================================================================
+declare username
+declare password
+declare share_name
+declare max_size_gb
+
+# Read config
+username=$(bashio::config 'username')
+password=$(bashio::config 'password')
+share_name=$(bashio::config 'share_name')
+max_size_gb=$(bashio::config 'max_size_gb')
+
+# Validate password is set
+if bashio::var.is_empty "${password}"; then
+    bashio::exit.nok "Password must be set in add-on configuration"
+fi
+
+# Create Time Machine directory
+mkdir -p /share/timemachine
+
+# Create Samba user
+addgroup -S "${username}" 2>/dev/null || true
+adduser -S -G "${username}" -s /sbin/nologin -H -D "${username}" 2>/dev/null || true
+echo -e "${password}\n${password}" | smbpasswd -a -s "${username}"
+
+# Set ownership
+chown -R "${username}:${username}" /share/timemachine
+
+# Generate smb.conf from template
+tempio \
+    -conf /data/options.json \
+    -template /usr/share/tempio/smb.gtpl \
+    -out /etc/samba/smb.conf
+
+bashio::log.info "Time Machine share '${share_name}' initialized for user '${username}'"
+if [ "${max_size_gb}" -gt 0 ]; then
+    bashio::log.info "Maximum backup size: ${max_size_gb} GB"
+else
+    bashio::log.info "Maximum backup size: unlimited"
+fi

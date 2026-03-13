@@ -1,0 +1,23 @@
+name: Time Machine
+version: 1.0.0
+slug: timemachine
+description: macOS Time Machine backup target via Samba with vfs_fruit
+url: https://github.com/emilieneloy/hassio-addon-timemachine
+arch:
+  - aarch64
+startup: services
+boot: auto
+host_network: true
+map:
+  - share:rw
+options:
+  username: timemachine
+  password: ""
+  share_name: TimeMachine
+  max_size_gb: 512
+schema:
+  username: str
+  password: password
+  share_name: str
+  max_size_gb: "int(0,)"
+init: false

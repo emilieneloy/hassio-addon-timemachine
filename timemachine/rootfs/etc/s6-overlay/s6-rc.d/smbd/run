@@ -1,0 +1,6 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Start Samba daemon
+# ==============================================================================
+bashio::log.info "Starting Samba for Time Machine..."
+exec smbd --foreground --debug-stdout --no-process-group </dev/null
