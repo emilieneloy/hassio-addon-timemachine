@@ -1,5 +1,5 @@
 name: Time Machine
-version: 1.0.0
+version: 1.1.0
 slug: timemachine
 description: macOS Time Machine backup target via Samba with vfs_fruit
 url: https://github.com/emilieneloy/hassio-addon-timemachine
@@ -8,6 +8,7 @@ arch:
 startup: services
 boot: auto
 host_network: true
+host_dbus: true
 map:
   - share:rw
 options:
