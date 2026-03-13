@@ -18,11 +18,13 @@ macOS Time Machine backup target for Home Assistant OS, using Samba with Apple's
 
 ## Connect from macOS
 
+The share should appear automatically in **System Settings > General > Time Machine > Add Backup Disk** via Bonjour/mDNS auto-discovery.
+
+Alternatively, use the command line:
+
 ```bash
 tmutil setdestination -a smb://timemachine:YOUR_PASSWORD@homeassistant.local/TimeMachine
 ```
-
-Or use **System Settings > General > Time Machine > Add Backup Disk**.
 
 ## Requirements
 
