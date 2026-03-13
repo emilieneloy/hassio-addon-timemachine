@@ -28,7 +28,7 @@
 
    # Time Machine support
    fruit:time machine = yes
-   {{ if gt .max_size_gb 0 }}fruit:time machine max size = {{ .max_size_gb }}G{{ end }}
+   {{ if .max_size_gb }}fruit:time machine max size = {{ .max_size_gb }}G{{ end }}
 
    # Locking (required for Time Machine reliability)
    kernel oplocks = no
